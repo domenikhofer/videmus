@@ -16,7 +16,7 @@
 </form>
   <md-tab-group>
     <div *ngFor="let topic of formfields; let i = index" [attr.data-index]="i">
-      <md-tab label="{{topic.topic}} {{topicScore  ? (topicScore['t'+i]): ''}}">
+      <md-tab label="{{topic.topic}} {{scores[i] ? scores[i].result : ''}}">
         <div *ngFor="let criteria of topic.criteria">
         <md-card>
           <md-card-header>

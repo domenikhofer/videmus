@@ -7,7 +7,7 @@ import {Component, Input, OnChanges, OnInit, ViewChild, ViewChildren} from '@ang
 })
 export class CoachingFormComponent implements OnInit {
   @ViewChildren('group') group;
-  topicScore;
+  scores = [];
   formfields = [
     {
       topic: 'Begrüssung',
@@ -153,6 +153,65 @@ export class CoachingFormComponent implements OnInit {
           subtitle: 'Schafft angenehme und entspannte Atmosphäre'
         }
       ]
+    },
+    {
+      topic: 'Abschluss',
+      criteria: [
+        {
+          title: 'Zusammenfassung',
+          subtitle: 'Fasst bisheriges zusammen'
+        },
+        {
+          title: 'Mehrfachkontakte',
+          subtitle: 'Vermeidet Mehrfachkontakte'
+        },
+        {
+          title: 'Kaufentscheid',
+          subtitle: 'Bestärkend'
+        },
+        {
+          title: 'Swisscom Vorteile',
+          subtitle: 'Macht Kunde auf Vorteile aufmerksam'
+        },
+        {
+          title: 'Unterhalten',
+          subtitle: 'Ruhige Minuten werden vom Berater genutzt'
+        },
+        {
+          title: 'Nächste Schritte',
+          subtitle: 'Informiert'
+        }
+      ]
+    }
+    ,
+    {
+      topic: 'Verabschiedung',
+      criteria: [
+        {
+          title: 'Verabschiedung',
+          subtitle: 'Kreativ, dynamisch und persönlich'
+        },
+        {
+          title: 'Mimik und Gestik ',
+          subtitle: 'Positive Ausstrahlung'
+        },
+        {
+          title: 'Feedback',
+          subtitle: 'Holt aktiv Feedback ein'
+        },
+        {
+          title: 'Beratungsort',
+          subtitle: 'Hinterlässt den Beratungsort ordentlich'
+        },
+        {
+          title: 'Blickkontakt',
+          subtitle: 'Nimmt Blickkontakt mit warteten Kunden auf'
+        },
+        {
+          title: 'Bereitschaft',
+          subtitle: 'Signalisiert Bereitschaft für die nächste Beratung'
+        }
+      ]
     }
   ];
 
@@ -163,15 +222,17 @@ export class CoachingFormComponent implements OnInit {
   }
 
   showUpdates() {
-    const score = {};
+    this.scores = [];
     this.group._results.forEach((element) => {
-      const count = this.group._results.filter(
-        number => number._value && number._name === element._name).length;
-      (!score[element._name] ?
-        score[element._name] = (element._value ? parseInt(element._value, 10) : 0 ) / count :
-        score[element._name] += (element._value ? parseInt(element._value, 10) : 0 ) / count );
+      if (this.scores.filter(el => el.id === element._name).length === 0) {
+        const newObject = {id: element._name, result: []};
+        this.scores.push(newObject);
+      }
+      const scoresIndex = this.scores.findIndex(x => x.id === element._name);
+      this.scores[scoresIndex].result.push(element._value);
     });
-    this.topicScore = score;
-    console.log(score);
+    console.log(this.scores);
+
+
   }
 }
