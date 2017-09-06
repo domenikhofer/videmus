@@ -1,7 +1,7 @@
 <md-card>
   <md-card-title>Coaching Formular</md-card-title>
 <md-card-content>
-<form class="coaching_form">
+<form class="coaching_form_1">
   <md-form-field>
     <input mdInput placeholder="Name Mitarbeiter">
   </md-form-field>
@@ -14,7 +14,7 @@
    <md-datepicker #picker></md-datepicker>
   </md-form-field>
 </form>
-  <md-tab-group>
+  <md-tab-group (selectChange)="setGraph($event)">
     <div *ngFor="let topic of formfields; let i = index" [attr.data-index]="i">
       <md-tab label="{{topic.topic}} {{scores[i] ? scores[i].result : ''}}">
         <div *ngFor="let criteria of topic.criteria">
@@ -35,13 +35,42 @@
 
           </md-button-toggle-group>
         </md-card>
-        </div>
-      </md-tab>
 
+
+          </div>
+
+
+    <div style="display: block">
+      <canvas #graph baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+      ></canvas>
+      </div>
+      </md-tab>
 
 
     </div>
 
   </md-tab-group>
+
+  <form class="coaching_form_2">
+    <md-form-field>
+      <textarea mdInput placeholder="Massnahmenplan">
+      </textarea>
+    </md-form-field>
+    <md-form-field>
+           <textarea mdInput placeholder="Bemerkungen">
+      </textarea>
+    </md-form-field>
+  </form>
+
+
+
+
+
+
 </md-card-content>
 </md-card>

@@ -7,7 +7,27 @@ import {Component, Input, OnChanges, OnInit, ViewChild, ViewChildren} from '@ang
 })
 export class CoachingFormComponent implements OnInit {
   @ViewChildren('group') group;
+  @ViewChild('graph') graph;
   scores = [];
+  tab = 0;
+
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    scales: {
+      xAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  };
+  public barChartType:string = 'horizontalBar';
+  public barChartLegend:boolean = true;
+
+  public barChartLabels:string[] = [];
+  public barChartData:any[] = [];
+
   formfields = [
     {
       topic: 'Begrüssung',
@@ -219,6 +239,9 @@ export class CoachingFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.barChartData = [
+      {data: (this.scores.length !== 0 ? this.scores[this.tab].result : []), label: this.formfields[this.tab].topic}
+    ];
   }
 
   showUpdates() {
@@ -229,10 +252,29 @@ export class CoachingFormComponent implements OnInit {
         this.scores.push(newObject);
       }
       const scoresIndex = this.scores.findIndex(x => x.id === element._name);
-      this.scores[scoresIndex].result.push(element._value);
+      this.scores[scoresIndex].result.push((element._value ? element._value : 0));
     });
-    console.log(this.scores);
 
+    this.updateGraph();
 
   }
+  setGraph(e) {
+   this.tab = e.index;
+   this.updateGraph();
+  }
+
+  updateGraph() {
+    const data = [];
+    this.formfields[this.tab].criteria.forEach(x => data.push(x.title));
+    this.barChartLabels = [];
+    this.barChartLabels = data;
+    setTimeout(() => {
+      this.barChartData = [
+        {data: (this.scores.length !== 0 ? this.scores[this.tab].result : []), label: this.formfields[this.tab].topic}
+        ];
+    }, 0);
+
+  }
+
+
 }

@@ -9,6 +9,7 @@ import {
   MdToolbarModule
 } from '@angular/material';
 import { CoachingFormComponent } from './coaching-form/coaching-form.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CoachingFormComponent } from './coaching-form/coaching-form.component';
     MdDatepickerModule,
     MdNativeDateModule,
     MdButtonModule,
-    MdButtonToggleModule
+    MdButtonToggleModule,
+    ChartsModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-CH'}
