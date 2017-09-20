@@ -1,76 +1,75 @@
 <md-card>
   <md-card-title>Coaching Formular</md-card-title>
-<md-card-content>
-<form class="coaching_form_1">
-  <md-form-field>
-    <input mdInput placeholder="Name Mitarbeiter">
-  </md-form-field>
-  <md-form-field>
-    <input mdInput placeholder="Bewertet durch">
-  </md-form-field>
-  <md-form-field>
-    <input mdInput [mdDatepicker]="picker" placeholder="Choose a date">
-    <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-   <md-datepicker #picker></md-datepicker>
-  </md-form-field>
-</form>
-  <md-tab-group (selectChange)="setGraph($event)">
-    <div *ngFor="let topic of formfields; let i = index" [attr.data-index]="i">
-      <md-tab label="{{topic.topic}} {{scores[i] ? scores[i].result : ''}}">
-        <div *ngFor="let criteria of topic.criteria">
-        <md-card>
-          <md-card-header>
-            <md-card-title>{{criteria.title}}</md-card-title>
-            <md-card-subtitle>{{criteria.subtitle}}</md-card-subtitle>
+  <md-card-content>
+    <form class="coaching_form_1">
+      <md-form-field>
+        <input mdInput placeholder="Name Mitarbeiter">
+      </md-form-field>
+      <md-form-field>
+        <input mdInput placeholder="Bewertet durch">
+      </md-form-field>
+      <md-form-field>
+        <input mdInput [mdDatepicker]="picker" placeholder="Choose a date">
+        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+        <md-datepicker #picker></md-datepicker>
+      </md-form-field>
 
-          </md-card-header>
-          <md-button-toggle-group  #group="mdButtonToggleGroup" (change)="showUpdates()" name="t{{i}}">
-            <md-button-toggle value="1">1</md-button-toggle>
-            <md-button-toggle value="2">2</md-button-toggle>
-            <md-button-toggle value="3">3</md-button-toggle>
-            <md-button-toggle value="4">4</md-button-toggle>
-            <md-button-toggle value="5">5</md-button-toggle>
-            <md-button-toggle value="6">6</md-button-toggle>
+    <md-tab-group (selectChange)="setGraph($event)">
+      <div *ngFor="let topic of formfields; let i = index" [attr.data-index]="i">
+        <md-tab label="{{topic.topic}} {{(scores[i] ? scores[i].result : []) | average }}">
+          <div *ngFor="let criteria of topic.criteria">
+            <md-card>
+              <md-card-header>
+                <md-card-title>{{criteria.title}}</md-card-title>
+                <md-card-subtitle>{{criteria.subtitle}}</md-card-subtitle>
+
+              </md-card-header>
+              <md-button-toggle-group #group="mdButtonToggleGroup" (change)="showUpdates()" name="t{{i}}">
+                <md-button-toggle value="1">1</md-button-toggle>
+                <md-button-toggle value="2">2</md-button-toggle>
+                <md-button-toggle value="3">3</md-button-toggle>
+                <md-button-toggle value="4">4</md-button-toggle>
+                <md-button-toggle value="5">5</md-button-toggle>
+                <md-button-toggle value="6">6</md-button-toggle>
 
 
-          </md-button-toggle-group>
-        </md-card>
+              </md-button-toggle-group>
+            </md-card>
 
 
           </div>
 
+          <md-card>
+            <div style="display: block">
+              <canvas #graph baseChart
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType"
+              ></canvas>
+            </div>
+          </md-card>
+        </md-tab>
 
-    <div style="display: block">
-      <canvas #graph baseChart
-              [datasets]="barChartData"
-              [labels]="barChartLabels"
-              [options]="barChartOptions"
-              [legend]="barChartLegend"
-              [chartType]="barChartType"
-      ></canvas>
+
       </div>
-      </md-tab>
+
+    </md-tab-group>
 
 
-    </div>
-
-  </md-tab-group>
-
-  <form class="coaching_form_2">
-    <md-form-field>
-      <textarea mdInput placeholder="Massnahmenplan">
-      </textarea>
-    </md-form-field>
-    <md-form-field>
-           <textarea mdInput placeholder="Bemerkungen">
-      </textarea>
-    </md-form-field>
-  </form>
+      <md-form-field>
+        <textarea mdInput placeholder="Massnahmenplan"></textarea>
+      </md-form-field>
+      <md-form-field>
+        <textarea mdInput placeholder="Bemerkungen"></textarea>
+      </md-form-field>
 
 
+        <button  md-fab color="accent"></button>
+
+    </form>
 
 
-
-
-</md-card-content>
+  </md-card-content>
 </md-card>

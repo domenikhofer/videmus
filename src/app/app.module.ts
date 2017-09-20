@@ -5,16 +5,20 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MdButtonModule, MdButtonToggleModule,
-  MdCardModule, MdDatepickerModule, MdInputModule, MdNativeDateModule, MdSliderModule, MdTabsModule,
+  MdCardModule, MdDatepickerModule, MdIcon, MdIconRegistry, MdInputModule, MdNativeDateModule, MdSliderModule,
+  MdTabsModule,
+  MdTextareaAutosize,
   MdToolbarModule
 } from '@angular/material';
 import { CoachingFormComponent } from './coaching-form/coaching-form.component';
 import {ChartsModule} from 'ng2-charts';
+import { AveragePipe } from './average.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoachingFormComponent
+    CoachingFormComponent,
+    AveragePipe
   ],
   imports: [
     BrowserModule,
