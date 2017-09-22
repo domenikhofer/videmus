@@ -1,15 +1,15 @@
 <md-card>
   <md-card-title>Coaching Formular</md-card-title>
   <md-card-content>
-    <form class="coaching_form_1">
+    <form #formData="ngForm" (ngSubmit)="saveData(formData)">
       <md-form-field>
-        <input mdInput placeholder="Name Mitarbeiter">
+        <input name="name_evaluator" ngModel mdInput placeholder="Name Mitarbeiter">
       </md-form-field>
       <md-form-field>
-        <input mdInput placeholder="Bewertet durch">
+        <input name="name_candidate" ngModel mdInput placeholder="Bewertet durch">
       </md-form-field>
       <md-form-field>
-        <input mdInput [mdDatepicker]="picker" placeholder="Choose a date">
+        <input name="date" ngModel mdInput [mdDatepicker]="picker" placeholder="Choose a date">
         <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
         <md-datepicker #picker></md-datepicker>
       </md-form-field>
@@ -59,14 +59,14 @@
 
 
       <md-form-field>
-        <textarea mdInput placeholder="Massnahmenplan"></textarea>
+        <textarea name="measures" ngModel mdInput placeholder="Massnahmenplan"></textarea>
       </md-form-field>
       <md-form-field>
-        <textarea mdInput placeholder="Bemerkungen"></textarea>
+        <textarea name="notes" ngModel mdInput placeholder="Bemerkungen"></textarea>
       </md-form-field>
 
 
-        <button  md-fab color="accent"></button>
+      <button type="submit"  md-fab color="accent"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
 
     </form>
 

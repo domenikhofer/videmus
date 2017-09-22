@@ -1,4 +1,5 @@
 import {Component, Input, OnChanges, OnInit, ViewChild, ViewChildren} from '@angular/core';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-coaching-form',
@@ -17,13 +18,16 @@ export class CoachingFormComponent implements OnInit {
     scales: {
       xAxes: [{
         ticks: {
-          beginAtZero: true
+          beginAtZero: true,
+          min: 0,
+          max: 6,
+          stepsize: 1
         }
       }]
     }
   };
   public barChartType:string = 'horizontalBar';
-  public barChartLegend:boolean = true;
+  public barChartLegend:boolean = false;
 
   public barChartLabels:string[] = [];
   public barChartData:any[] = [];
@@ -274,6 +278,11 @@ export class CoachingFormComponent implements OnInit {
         ];
     }, 0);
 
+  }
+
+  saveData(form: NgForm) {
+    console.log(form.value);
+    console.log(this.scores);
   }
 
 

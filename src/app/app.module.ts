@@ -13,6 +13,7 @@ import {
 import { CoachingFormComponent } from './coaching-form/coaching-form.component';
 import {ChartsModule} from 'ng2-charts';
 import { AveragePipe } from './average.pipe';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { AveragePipe } from './average.pipe';
     MdNativeDateModule,
     MdButtonModule,
     MdButtonToggleModule,
-    ChartsModule
+    ChartsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-CH'}
