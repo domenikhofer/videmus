@@ -5,9 +5,8 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MdButtonModule, MdButtonToggleModule,
-  MdCardModule, MdDatepickerModule, MdIcon, MdIconRegistry, MdInputModule, MdNativeDateModule, MdSliderModule,
+  MdCardModule, MdDatepickerModule, MdInputModule, MdNativeDateModule, MdSliderModule,
   MdTabsModule,
-  MdTextareaAutosize,
   MdToolbarModule
 } from '@angular/material';
 import { CoachingFormComponent } from './coaching-form/coaching-form.component';
@@ -16,14 +15,15 @@ import { AveragePipe } from './average.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { GrobAuswertungComponent } from './grob-auswertung/grob-auswertung.component';
 import {FormFieldsService} from './form-fields.service';
-import {ChartistModule} from 'ng-chartist';
+import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-chart.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     CoachingFormComponent,
     AveragePipe,
-    GrobAuswertungComponent
+    GrobAuswertungComponent,
+    GoogleChart
   ],
   imports: [
     BrowserModule,
@@ -39,8 +39,7 @@ import {ChartistModule} from 'ng-chartist';
     MdButtonToggleModule,
     ChartsModule,
     FormsModule,
-    ReactiveFormsModule,
-    ChartistModule
+    ReactiveFormsModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-CH'},

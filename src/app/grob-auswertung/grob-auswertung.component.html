@@ -3,15 +3,8 @@
   <md-card-content>
 
     <md-card>
-      <div style="display: block">
-        <x-chartist
-          [data]="chart.data"
-          [type]="chart.type"
-          [options]="chart.options"
-          [responsiveOptions]="chart.responsiveOptions"
-          [events]="chart.events">
-        </x-chartist>
-      </div>
+      <md-card-title>Gesamtauswertung</md-card-title>
+      <div id="bar_chart" [chartData]="bar_ChartData" [chartOptions] = "bar_ChartOptions" chartType="BarChart" GoogleChart></div>
     </md-card>
 
   </md-card-content>
