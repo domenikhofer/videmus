@@ -7,5 +7,17 @@
       <div id="bar_chart" [chartData]="bar_ChartData" [chartOptions] = "bar_ChartOptions" chartType="BarChart" GoogleChart></div>
     </md-card>
 
+    <div *ngFor="let chart of bar_Datas; let i = index" [attr.data-index]="i" >
+
+
+      <md-card>
+        <md-card-title>{{formFields[i].topic}}</md-card-title>
+        <div id="{{'bar_chart'+i}}" [chartData]="chart" [chartOptions] = "bar_ChartOptions" chartType="BarChart" GoogleChart></div>
+      </md-card>
+
+
+
+    </div>
+
   </md-card-content>
 </md-card>

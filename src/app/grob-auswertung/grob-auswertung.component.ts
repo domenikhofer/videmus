@@ -8,21 +8,23 @@ import {FormFieldsService} from '../form-fields.service';
 })
 export class GrobAuswertungComponent implements OnInit {
   FormFieldService;
+  userAverages;
+  users;
 
   constructor(FormFieldService: FormFieldsService) {
-  this.FormFieldService = FormFieldService;
+    this.FormFieldService = FormFieldService;
   }
 
-  public bar_ChartData = [
-
-  ];
+  public bar_ChartData = [];
+  public bar_Datas = [];
+  public formFields = [];
 
   public bar_ChartOptions = {
     hAxis: {
       minValue: 0,
       ticks: [0, 1, 2, 3, 4, 5, 6]
     },
-    legend: { position: 'none' }
+    legend: {position: 'none'}
   };
 
   date = '2017-09-27T22:00:00.000Z';
@@ -30,9 +32,22 @@ export class GrobAuswertungComponent implements OnInit {
   ngOnInit() {
     const storage = this.allStorage();
     const filtStorage = storage.filter(x => x.date === this.date);
-    this.gesamtAuswertung(filtStorage);
+    this.formFields = this.FormFieldService.getFormFields();
 
-    console.log(filtStorage);
+
+    this.userAverages = filtStorage.map(
+      x => x.data.map(
+        y => y.result.reduce(
+          (z, a) => parseInt(a, 10) + parseInt(z, 10)
+        ) / y.result.length
+      )
+    );
+    this.users = filtStorage.map(
+      x => x.name_candidate
+    );
+
+    this.gesamtAuswertung();
+    this.grobAuswertungen();
 
   }
 
@@ -49,19 +64,10 @@ export class GrobAuswertungComponent implements OnInit {
     return values;
   }
 
-  gesamtAuswertung(filtStorage) {
+  gesamtAuswertung() {
 
-    const userAverages = filtStorage.map(
-      x => x.data.map(
-        y => y.result.reduce(
-          (z, a) => parseInt(a, 10) + parseInt(z, 10)
-        ) / y.result.length
-      )
-    );
-    const users = filtStorage.map(
-      x => x.name_candidate
-    );
-    const chartData = userAverages.map(
+
+    const chartData = this.userAverages.map(
       x => {
         let sum = 0;
         let notZeros = 0;
@@ -74,9 +80,9 @@ export class GrobAuswertungComponent implements OnInit {
     );
 
     const chartDataFormatted = [];
-    chartData.forEach((x, y) => chartDataFormatted.push([users[y], x]));
+    chartData.forEach((x, y) => chartDataFormatted.push([this.users[y], x]));
 
-    this.bar_ChartData = [['Person', 'Durchschnitt'],...chartDataFormatted];
+    this.bar_ChartData = [['Person', 'Durchschnitt'], ...chartDataFormatted];
 
     /*
      ['Element', 'Density', { role: 'style' }],
@@ -85,6 +91,24 @@ export class GrobAuswertungComponent implements OnInit {
      ['Gold', 19.30, 'gold'],
      ['Platinum', 21.45, 'color: #e5e4e2' ]
      * */
+  }
+
+  grobAuswertungen() {
+
+    const dataBracket = [];
+    for (let i = 0; i < this.userAverages[0].length; i++) {
+      const dataPack = [];
+      dataPack.push(['Person', 'Durchschnitt']);
+      this.userAverages.forEach((x, y) => {
+        dataPack.push([this.users[y], x[i]]);
+      })
+      dataBracket.push(dataPack);
+    }
+
+
+    this.bar_Datas = dataBracket;
+
+
   }
 
 }
