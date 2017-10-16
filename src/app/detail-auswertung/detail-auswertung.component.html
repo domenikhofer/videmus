@@ -1,0 +1,25 @@
+<md-card>
+  <md-card-title>Detailauswertung</md-card-title>
+  <md-card-content>
+
+    <md-tab-group>
+    <div *ngFor="let charts of bar_ChartData; let i = index" [attr.data-index]="i" >
+
+
+        <md-tab label="{{formFields[i].topic}}">
+
+      <div *ngFor="let chart of charts; let j = index" [attr.data-index]="j" >
+
+      <md-card>
+        <md-card-title>{{formFields[i].criteria[j].title}}</md-card-title>
+        <div id="{{'bar_chart'+i+j}}" [chartData]="chart" [chartOptions] = "bar_ChartOptions" chartType="BarChart" GoogleChart></div>
+      </md-card>
+
+      </div>
+
+        </md-tab>
+    </div>
+    </md-tab-group>
+
+  </md-card-content>
+</md-card>

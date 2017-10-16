@@ -5,7 +5,9 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MdButtonModule, MdButtonToggleModule,
-  MdCardModule, MdDatepickerModule, MdInputModule, MdNativeDateModule, MdSliderModule,
+  MdCardModule, MdDatepickerModule, MdFormFieldModule, MdInputModule, MdNativeDateModule, MdOptionModule,
+  MdSelectModule,
+  MdSliderModule,
   MdTabsModule,
   MdToolbarModule
 } from '@angular/material';
@@ -16,6 +18,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { GrobAuswertungComponent } from './grob-auswertung/grob-auswertung.component';
 import {FormFieldsService} from './form-fields.service';
 import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-chart.directive';
+import { DetailAuswertungComponent } from './detail-auswertung/detail-auswertung.component';
+import { MenuComponent } from './menu/menu.component';
+import {RouterModule, Routes} from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'form', component: CoachingFormComponent},
+  { path: 'grob', component: GrobAuswertungComponent},
+  { path: 'detail', component: DetailAuswertungComponent},
+  { path: '', component: MenuComponent}
+]
 
 @NgModule({
   declarations: [
@@ -23,9 +35,14 @@ import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-char
     CoachingFormComponent,
     AveragePipe,
     GrobAuswertungComponent,
-    GoogleChart
+    GoogleChart,
+    DetailAuswertungComponent,
+    MenuComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes
+    ),
     BrowserModule,
     BrowserAnimationsModule,
     MdSliderModule,
@@ -37,6 +54,9 @@ import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-char
     MdNativeDateModule,
     MdButtonModule,
     MdButtonToggleModule,
+    MdFormFieldModule,
+    MdOptionModule,
+    MdSelectModule,
     ChartsModule,
     FormsModule,
     ReactiveFormsModule

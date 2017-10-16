@@ -1,5 +1,14 @@
 <md-card>
-  <md-card-title>Grobauswertung</md-card-title>
+  <md-card-title>{{'Grobauswertung : ' + currentDate }}</md-card-title>
+
+  <form>
+    <md-select placeholder="Datum wählen" (change)="onDateChange($event.value)" name="date">
+      <md-option *ngFor="let date of dataDates" [value]="date">
+        {{date}}
+      </md-option>
+    </md-select>
+  </form>
+  <br><br>
   <md-card-content>
 
     <md-card>

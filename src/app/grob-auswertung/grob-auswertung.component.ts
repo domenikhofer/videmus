@@ -10,6 +10,10 @@ export class GrobAuswertungComponent implements OnInit {
   FormFieldService;
   userAverages;
   users;
+  dataDates;
+  storage;
+  currentDate;
+
 
   constructor(FormFieldService: FormFieldsService) {
     this.FormFieldService = FormFieldService;
@@ -19,6 +23,7 @@ export class GrobAuswertungComponent implements OnInit {
   public bar_Datas = [];
   public formFields = [];
 
+
   public bar_ChartOptions = {
     hAxis: {
       minValue: 0,
@@ -27,11 +32,20 @@ export class GrobAuswertungComponent implements OnInit {
     legend: {position: 'none'}
   };
 
-  date = '2017-09-27T22:00:00.000Z';
 
   ngOnInit() {
-    const storage = this.allStorage();
-    const filtStorage = storage.filter(x => x.date === this.date);
+    this.storage = this.allStorage();
+    this.dataDates = [];
+    this.storage.forEach(x => (this.dataDates.indexOf(x.date) === -1 && x.date !== null ? this.dataDates.push(x.date) : ''));
+    this.dataDates.sort((a, b) => (a < b ? 1 : 0));
+    console.log(this.dataDates);
+
+    this.drawGraphs(this.dataDates[0]);
+  }
+
+  drawGraphs(date) {
+    this.currentDate = date;
+    const filtStorage = this.storage.filter(x => x.date === date);
     this.formFields = this.FormFieldService.getFormFields();
 
 
@@ -48,7 +62,6 @@ export class GrobAuswertungComponent implements OnInit {
 
     this.gesamtAuswertung();
     this.grobAuswertungen();
-
   }
 
   allStorage() {
@@ -110,5 +123,10 @@ export class GrobAuswertungComponent implements OnInit {
 
 
   }
+
+  onDateChange(date) {
+   this.drawGraphs(date);
+  }
+
 
 }
