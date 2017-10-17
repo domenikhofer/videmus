@@ -1,15 +1,22 @@
 <md-card>
-  <md-card-title>Detailauswertung</md-card-title>
+  <md-card-title>{{'Detailauswertung ' + currentDate}}</md-card-title>
+  <form>
+    <md-select placeholder="Datum wählen" (change)="onDateChange($event.value)" name="date">
+      <md-option *ngFor="let date of dataDates" [value]="date">
+        {{date}}
+      </md-option>
+    </md-select>
+  </form>
+  <br><br>
   <md-card-content>
-
     <md-tab-group>
+
     <div *ngFor="let charts of bar_ChartData; let i = index" [attr.data-index]="i" >
 
 
         <md-tab label="{{formFields[i].topic}}">
 
       <div *ngFor="let chart of charts; let j = index" [attr.data-index]="j" >
-
       <md-card>
         <md-card-title>{{formFields[i].criteria[j].title}}</md-card-title>
         <div id="{{'bar_chart'+i+j}}" [chartData]="chart" [chartOptions] = "bar_ChartOptions" chartType="BarChart" GoogleChart></div>

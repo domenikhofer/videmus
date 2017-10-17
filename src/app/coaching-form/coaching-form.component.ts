@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, ViewChildren} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {FormFieldsService} from '../form-fields.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-coaching-form',
@@ -36,7 +37,7 @@ export class CoachingFormComponent implements OnInit {
   formfields;
 
 
-  constructor(FormFieldService: FormFieldsService) {
+  constructor(FormFieldService: FormFieldsService, public router: Router) {
     this.FormFieldService = FormFieldService;
     this.formfields = FormFieldService.getFormFields();
   }
@@ -84,6 +85,7 @@ export class CoachingFormComponent implements OnInit {
 form.value.data = this.scores;
 const random = Math.floor(Math.random() * 10000).toString();
 localStorage.setItem(random , JSON.stringify(form.value));
+this.router.navigate(['/']);
   }
 
 

@@ -38,7 +38,6 @@ export class GrobAuswertungComponent implements OnInit {
     this.dataDates = [];
     this.storage.forEach(x => (this.dataDates.indexOf(x.date) === -1 && x.date !== null ? this.dataDates.push(x.date) : ''));
     this.dataDates.sort((a, b) => (a < b ? 1 : 0));
-    console.log(this.dataDates);
 
     this.drawGraphs(this.dataDates[0]);
   }
