@@ -21,13 +21,15 @@ import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-char
 import { DetailAuswertungComponent } from './detail-auswertung/detail-auswertung.component';
 import { MenuComponent } from './menu/menu.component';
 import {RouterModule, Routes} from '@angular/router';
+import {DatePipe} from '@angular/common';
 
 const appRoutes: Routes = [
-  { path: 'form', component: CoachingFormComponent},
-  { path: 'grob', component: GrobAuswertungComponent},
-  { path: 'detail', component: DetailAuswertungComponent},
-  { path: '', component: MenuComponent}
-]
+  { path: ':id/form', component: CoachingFormComponent},
+  { path: ':id/grob', component: GrobAuswertungComponent},
+  { path: ':id/detail', component: DetailAuswertungComponent},
+  { path: ':id/menu', component: MenuComponent},
+  { path: ':id', redirectTo: ':id/menu', pathMatch: 'full'}
+];
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-CH'},
-    FormFieldsService
+    FormFieldsService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

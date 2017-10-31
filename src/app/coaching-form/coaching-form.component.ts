@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild, ViewChildren} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {FormFieldsService} from '../form-fields.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-coaching-form',
@@ -14,7 +14,7 @@ export class CoachingFormComponent implements OnInit {
   scores = [];
   tab = 0;
 
-  public barChartOptions:any = {
+  public barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true,
     scales: {
@@ -28,16 +28,18 @@ export class CoachingFormComponent implements OnInit {
       }]
     }
   };
-  public barChartType:string = 'horizontalBar';
-  public barChartLegend:boolean = false;
+  public barChartType = 'horizontalBar';
+  public barChartLegend = false;
 
-  public barChartLabels:string[] = [];
-  public barChartData:any[] = [];
+  public barChartLabels: string[] = [];
+  public barChartData: any[] = [];
   FormFieldService;
   formfields;
+  oe;
+  myDate = new Date();
 
 
-  constructor(FormFieldService: FormFieldsService, public router: Router) {
+  constructor(FormFieldService: FormFieldsService, public router: Router, private route: ActivatedRoute) {
     this.FormFieldService = FormFieldService;
     this.formfields = FormFieldService.getFormFields();
   }
@@ -46,6 +48,9 @@ export class CoachingFormComponent implements OnInit {
     this.barChartData = [
       {data: (this.scores.length !== 0 ? this.scores[this.tab].result : []), label: this.formfields[this.tab].topic}
     ];
+    this.route.params.subscribe(params => {
+      this.oe = params['id'];
+    });
   }
 
   showUpdates() {
@@ -80,12 +85,22 @@ export class CoachingFormComponent implements OnInit {
 
   }
 
+  /*
+   ['Element', 'Density', { role: 'style' }],
+   ['Copper', 8.94, '#b87333'],            // RGB value
+   ['Silver', 10.49, 'silver'],            // English color name
+   ['Gold', 19.30, 'gold'],
+   ['Platinum', 21.45, 'color: #e5e4e2' ]
+   * */
+
   saveData(form: NgForm) {
 
 form.value.data = this.scores;
+form.value.oe = this.oe;
 const random = Math.floor(Math.random() * 10000).toString();
 localStorage.setItem(random , JSON.stringify(form.value));
-this.router.navigate(['/']);
+
+this.router.navigate([this.oe, 'menu']);
   }
 
 

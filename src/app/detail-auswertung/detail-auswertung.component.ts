@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormFieldsService} from '../form-fields.service';
+import {ActivatedRoute} from '@angular/router';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-detail-auswertung',
@@ -8,13 +10,14 @@ import {FormFieldsService} from '../form-fields.service';
 })
 export class DetailAuswertungComponent implements OnInit {
   FormFieldService;
-  dataDates;
+  names;
   storage;
   filtStorage;
   bar_ChartData;
-  currentDate;
+  currentName;
+  oe;
 
-  constructor(FormFieldService: FormFieldsService) {
+  constructor(FormFieldService: FormFieldsService, private route: ActivatedRoute, private datePipe: DatePipe) {
     this.FormFieldService = FormFieldService;
   }
 
@@ -26,19 +29,26 @@ export class DetailAuswertungComponent implements OnInit {
       minValue: 0,
       ticks: [0, 1, 2, 3, 4, 5, 6]
     },
+    vAxis: {
+      ticks: [0, 1, 2, 3, 4, 5, 6]
+    },
+    curveType: 'function',
     legend: {position: 'none'}
   };
 
 
   ngOnInit() {
-    this.storage = this.allStorage();
+    this.route.params.subscribe(params => {
+      this.oe = params['id'];
+    });
+    this.storage = this.allStorage().filter(x => x.oe === this.oe);
+    this.names = [];
+    this.storage.forEach(x => {
+      (this.names.indexOf(x.name_candidate) === -1 && x.name_candidate !== null ? this.names.push(x.name_candidate) : '');
+    });
+    this.names.sort((a, b) => (a < b ? 1 : 0));
 
-
-    this.dataDates = [];
-    this.storage.forEach(x => (this.dataDates.indexOf(x.date) === -1 && x.date !== null ? this.dataDates.push(x.date) : ''));
-    this.dataDates.sort((a, b) => (a < b ? 1 : 0));
-
-    this.getDetail(this.dataDates[0]);
+    this.getDetail(this.names[0]);
 
   }
 
@@ -52,12 +62,14 @@ export class DetailAuswertungComponent implements OnInit {
       values.push(JSON.parse(localStorage.getItem(keys[i])));
     }
 
+    values.sort((a, b) => (a.date > b.date ? 1 : -1));
+
     return values;
   }
 
-  getDetail(date) {
-    this.currentDate = date;
-    this.filtStorage = this.storage.filter(x => x.date === date);
+  getDetail(name) {
+    this.currentName = name;
+    this.filtStorage = this.storage.filter(x => x.name_candidate === name);
     this.formFields = this.FormFieldService.getFormFields();
 
 const dataCollection = [];
@@ -65,9 +77,9 @@ const dataCollection = [];
       const dataBracket = [];
       for (let j = 0; j < this.filtStorage[0].data[0].result.length; j++) {
         const dataPack = [];
-        dataPack.push(['Person', 'Wert'])
+        dataPack.push(['Person', 'Wert']);
         this.filtStorage.forEach(x => {
-          dataPack.push([x.name_candidate, parseInt(x.data[i].result[j], 10)]);
+          dataPack.push([this.datePipe.transform(x.date), parseInt(x.data[i].result[j], 10)]);
         });
         dataBracket.push(dataPack);
       }
@@ -75,11 +87,11 @@ const dataCollection = [];
     }
     setTimeout(() => {
       this.bar_ChartData = dataCollection;
-    }, 100)
+    }, 100);
   }
 
-  onDateChange(date) {
-    this.getDetail(date);
+  onDateChange(name) {
+    this.getDetail(name);
   }
 
 

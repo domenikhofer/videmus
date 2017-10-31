@@ -1,5 +1,5 @@
 <md-card>
-<button md-raised-button color="primary" routerLink="/form">Neues Formular</button><br><br>
-<button md-raised-button color="primary" routerLink="/grob">Grob-Auswertung</button><br><br>
-<button md-raised-button color="primary" routerLink="/detail">Detail-Auswertung</button><br><br><br><br><br><br><br><br><br><br>
+<button md-raised-button color="primary" (click)="onButtonClick('form')">Neues Formular</button>
+<button md-raised-button color="primary" (click)="onButtonClick('grob')">Grob-Auswertung</button>
+<button md-raised-button color="primary" (click)="onButtonClick('detail')">Detail-Auswertung</button>
 </md-card>

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormFieldsService} from '../form-fields.service';
+import {ActivatedRoute} from '@angular/router';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-grob-auswertung',
@@ -9,13 +11,14 @@ import {FormFieldsService} from '../form-fields.service';
 export class GrobAuswertungComponent implements OnInit {
   FormFieldService;
   userAverages;
-  users;
-  dataDates;
+  dates;
+  names;
   storage;
-  currentDate;
+  currentName;
+  oe;
 
 
-  constructor(FormFieldService: FormFieldsService) {
+  constructor(FormFieldService: FormFieldsService, private route: ActivatedRoute, private datePipe: DatePipe) {
     this.FormFieldService = FormFieldService;
   }
 
@@ -29,22 +32,31 @@ export class GrobAuswertungComponent implements OnInit {
       minValue: 0,
       ticks: [0, 1, 2, 3, 4, 5, 6]
     },
+    vAxis: {
+      ticks: [0, 1, 2, 3, 4, 5, 6]
+    },
+    curveType: 'function',
     legend: {position: 'none'}
   };
 
 
   ngOnInit() {
-    this.storage = this.allStorage();
-    this.dataDates = [];
-    this.storage.forEach(x => (this.dataDates.indexOf(x.date) === -1 && x.date !== null ? this.dataDates.push(x.date) : ''));
-    this.dataDates.sort((a, b) => (a < b ? 1 : 0));
+    this.route.params.subscribe(params => {
+      this.oe = params['id'];
+    });
+    this.storage = this.allStorage().filter(x => x.oe === this.oe);
+    this.names = [];
+    this.storage.forEach(x => {
+      (this.names.indexOf(x.name_candidate) === -1 && x.name_candidate !== null ? this.names.push(x.name_candidate) : '');
+    });
+    this.names.sort((a, b) => (a < b ? 1 : 0));
 
-    this.drawGraphs(this.dataDates[0]);
+    this.drawGraphs(this.names[0]);
   }
 
-  drawGraphs(date) {
-    this.currentDate = date;
-    const filtStorage = this.storage.filter(x => x.date === date);
+  drawGraphs(name) {
+    this.currentName = name;
+    const filtStorage = this.storage.filter(x => x.name_candidate === name);
     this.formFields = this.FormFieldService.getFormFields();
 
 
@@ -55,8 +67,8 @@ export class GrobAuswertungComponent implements OnInit {
         ) / y.result.length
       )
     );
-    this.users = filtStorage.map(
-      x => x.name_candidate
+    this.dates = filtStorage.map(
+      x => this.datePipe.transform(x.date)
     );
 
     this.gesamtAuswertung();
@@ -72,6 +84,8 @@ export class GrobAuswertungComponent implements OnInit {
     while (i--) {
       values.push(JSON.parse(localStorage.getItem(keys[i])));
     }
+
+    values.sort((a, b) => (a.date > b.date ? 1 : -1));
 
     return values;
   }
@@ -92,17 +106,11 @@ export class GrobAuswertungComponent implements OnInit {
     );
 
     const chartDataFormatted = [];
-    chartData.forEach((x, y) => chartDataFormatted.push([this.users[y], x]));
+    chartData.forEach((x, y) => chartDataFormatted.push([this.dates[y], x]));
 
     this.bar_ChartData = [['Person', 'Durchschnitt'], ...chartDataFormatted];
 
-    /*
-     ['Element', 'Density', { role: 'style' }],
-     ['Copper', 8.94, '#b87333'],            // RGB value
-     ['Silver', 10.49, 'silver'],            // English color name
-     ['Gold', 19.30, 'gold'],
-     ['Platinum', 21.45, 'color: #e5e4e2' ]
-     * */
+
   }
 
   grobAuswertungen() {
@@ -112,7 +120,7 @@ export class GrobAuswertungComponent implements OnInit {
       const dataPack = [];
       dataPack.push(['Person', 'Durchschnitt']);
       this.userAverages.forEach((x, y) => {
-        dataPack.push([this.users[y], x[i]]);
+        dataPack.push([this.dates[y], x[i]]);
       })
       dataBracket.push(dataPack);
     }
@@ -124,7 +132,7 @@ export class GrobAuswertungComponent implements OnInit {
   }
 
   onDateChange(date) {
-   this.drawGraphs(date);
+    this.drawGraphs(date);
   }
 
 
