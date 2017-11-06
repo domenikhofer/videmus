@@ -1,4 +1,9 @@
-canvas{
-  max-width:500px;
-  margin:20px;
+.mat-fab.mat-accent{
+  color:white;
+}
+
+.mat-button-toggle-checked{
+  background-color: #40c4ff;
+  color:white;
+  font-weight: bold;
 }

@@ -1,5 +1,8 @@
-<md-card>
-<button md-raised-button color="primary" (click)="onButtonClick('form')">Neues Formular</button>
-<button md-raised-button color="primary" (click)="onButtonClick('grob')">Grob-Auswertung</button>
-<button md-raised-button color="primary" (click)="onButtonClick('detail')">Detail-Auswertung</button>
-</md-card>
+<md-toolbar color="primary">
+  <md-toolbar-row>
+  <span class="title">{{title}}&nbsp;<sup><i class="fa fa-comments-o" aria-hidden="true"></i></sup></span>
+  <span><button md-raised-button color="white" (click)="onButtonClick('form')">Neues Formular</button>
+    <button md-raised-button color="white" (click)="onButtonClick('grob')">Grob-Auswertung</button>
+    <button md-raised-button color="white" (click)="onButtonClick('detail')">Detail-Auswertung</button></span>
+  </md-toolbar-row>
+</md-toolbar>

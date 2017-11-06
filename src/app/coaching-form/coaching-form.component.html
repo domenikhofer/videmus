@@ -1,13 +1,12 @@
 <app-menu></app-menu>
 <md-card>
-  <md-card-title>Coaching Formular</md-card-title>
   <md-card-content>
     <form #formData="ngForm" (ngSubmit)="saveData(formData)">
       <md-form-field>
-        <input name="name_evaluator" ngModel mdInput placeholder="Name Mitarbeiter">
+        <input name="name_evaluator" ngModel mdInput placeholder="Bewerter">
       </md-form-field>
       <md-form-field>
-        <input name="name_candidate" ngModel mdInput placeholder="Bewertet durch">
+        <input name="name_candidate" ngModel mdInput placeholder="Kandidat">
       </md-form-field>
       <md-form-field>
         <input name="date" [(ngModel)]="myDate" (click)="picker.open()" (focus)="picker.open()" readonly mdInput [mdDatepicker]="picker" placeholder="Datum">
@@ -40,17 +39,7 @@
 
           </div>
 
-          <md-card>
-            <div style="display: block">
-              <canvas #graph baseChart
-                      [datasets]="barChartData"
-                      [labels]="barChartLabels"
-                      [options]="barChartOptions"
-                      [legend]="barChartLegend"
-                      [chartType]="barChartType"
-              ></canvas>
-            </div>
-          </md-card>
+
         </md-tab>
 
 

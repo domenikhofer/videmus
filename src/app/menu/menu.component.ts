@@ -12,6 +12,7 @@ export class MenuComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   oe;
+  title = 'Videmus 2.0';
 
  ngOnInit() {
     this.route.params.subscribe(params => {

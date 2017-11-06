@@ -1,37 +1,5 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-@font-face {
-  font-family: 'TheSerifB_300';
-  src: url('./assets/fonts/TheSerif_Basic_C5_Web/TheSerifB_300_Light/TheSerifB_300_.woff') format('truetype');
-}
-@font-face {
-  font-family: 'TheSerifB_500';
-  src: url('./assets/fonts/TheSerif_Basic_C5_Web/TheSerifB_500_Plain/TheSerifB_500_.woff') format('truetype');
-}
 
-@font-face {
-  font-family: 'TheSerifB_700';
-  src: url('./assets/fonts/TheSerif_Basic_C5_Web/TheSerifB_700_Bold/TheSerifB_700_.woff') format('truetype');
-}
 
-font-face {
-  font-family: 'TheSansB_300', sans-serif;
-  src: url('./assets/fonts/TheSans_Basic_C5_Web/TheSansB_300_Light/TheSansB_300_.woff') format('truetype');
-}
-
-@font-face {
-  font-family: 'TheSansB_500';
-  src: url('./assets/fonts/TheSans_Basic_C5_Web/TheSansB_500_Plain/TheSansB_500_.woff') format('truetype');
-}
-@font-face {
-  font-family: 'TheSansB_700';
-  src: url('./assets/fonts/TheSans_Basic_C5_Web/TheSansB_700_Bold/TheSansB_700_.woff') format('truetype');
-}
-
-*{
-  margin:0;
-  padding:0;
-  font-family: 'TheSansB_300', sans-serif;
-}
 
 
