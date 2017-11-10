@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormFieldsService} from '../form-fields.service';
 import {ActivatedRoute} from '@angular/router';
 import {DatePipe} from '@angular/common';
+import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-chart.directive';
 
 @Component({
   selector: 'app-detail-auswertung',

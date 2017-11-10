@@ -1,65 +1,65 @@
 <app-menu></app-menu>
-<md-card>
-  <md-card-content>
+<mat-card>
+  <mat-card-content>
     <form #formData="ngForm" (ngSubmit)="saveData(formData)">
-      <md-form-field>
-        <input name="name_evaluator" ngModel mdInput placeholder="Bewerter">
-      </md-form-field>
-      <md-form-field>
-        <input name="name_candidate" ngModel mdInput placeholder="Kandidat">
-      </md-form-field>
-      <md-form-field>
-        <input name="date" [(ngModel)]="myDate" (click)="picker.open()" (focus)="picker.open()" readonly mdInput [mdDatepicker]="picker" placeholder="Datum">
-        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-        <md-datepicker #picker></md-datepicker>
-      </md-form-field>
+      <mat-form-field>
+        <input name="name_evaluator" ngModel matInput placeholder="Bewerter">
+      </mat-form-field>
+      <mat-form-field>
+        <input name="name_candidate" ngModel matInput placeholder="Kandidat">
+      </mat-form-field>
+      <mat-form-field>
+        <input name="date" [(ngModel)]="myDate" (click)="picker.open()" (focus)="picker.open()" readonly matInput [matDatepicker]="picker" placeholder="Datum">
 
-    <md-tab-group (selectChange)="setGraph($event)">
-      <div *ngFor="let topic of formfields; let i = index" [attr.data-index]="i">
-        <md-tab label="{{topic.topic}} {{(scores[i] ? scores[i].result : []) | average }}">
-          <div *ngFor="let criteria of topic.criteria">
-            <md-card>
-              <md-card-header>
-                <md-card-title>{{criteria.title}}</md-card-title>
-                <md-card-subtitle>{{criteria.subtitle}}</md-card-subtitle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-              </md-card-header>
-              <md-button-toggle-group #group="mdButtonToggleGroup" (change)="showUpdates()" name="t{{i}}">
-                <md-button-toggle value="1">1</md-button-toggle>
-                <md-button-toggle value="2">2</md-button-toggle>
-                <md-button-toggle value="3">3</md-button-toggle>
-                <md-button-toggle value="4">4</md-button-toggle>
-                <md-button-toggle value="5">5</md-button-toggle>
-                <md-button-toggle value="6">6</md-button-toggle>
+      <mat-tab-group (selectChange)="setGraph($event)">
+        <div *ngFor="let topic of formfields; let i = index" [attr.data-index]="i">
+          <mat-tab label="{{topic.topic}} {{(scores[i] ? scores[i].result : []) | average }}">
+            <div *ngFor="let criteria of topic.criteria">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>{{criteria.title}}</mat-card-title>
+                  <mat-card-subtitle>{{criteria.subtitle}}</mat-card-subtitle>
 
-
-              </md-button-toggle-group>
-            </md-card>
+                </mat-card-header>
+                <mat-button-toggle-group #group="matButtonToggleGroup" (change)="showUpdates()" name="t{{i}}">
+                  <mat-button-toggle value="1">1</mat-button-toggle>
+                  <mat-button-toggle value="2">2</mat-button-toggle>
+                  <mat-button-toggle value="3">3</mat-button-toggle>
+                  <mat-button-toggle value="4">4</mat-button-toggle>
+                  <mat-button-toggle value="5">5</mat-button-toggle>
+                  <mat-button-toggle value="6">6</mat-button-toggle>
 
 
-          </div>
+                </mat-button-toggle-group>
+              </mat-card>
 
 
-        </md-tab>
+            </div>
 
 
-      </div>
-
-    </md-tab-group>
+          </mat-tab>
 
 
-      <md-form-field>
-        <textarea name="measures" ngModel mdInput placeholder="Massnahmenplan"></textarea>
-      </md-form-field>
-      <md-form-field>
-        <textarea name="notes" ngModel mdInput placeholder="Bemerkungen"></textarea>
-      </md-form-field>
+        </div>
+
+      </mat-tab-group>
 
 
-      <button type="submit"  md-fab color="accent"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+      <mat-form-field>
+        <textarea name="measures" ngModel matInput placeholder="Massnahmenplan"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea name="notes" ngModel matInput placeholder="Bemerkungen"></textarea>
+      </mat-form-field>
+
+
+      <button type="submit"  mat-fab color="accent"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
 
     </form>
 
 
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>

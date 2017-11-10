@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-chart.directive';
 
 @Component({
   selector: 'app-root',

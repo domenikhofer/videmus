@@ -1,33 +1,33 @@
 <app-menu></app-menu>
-<md-card>
-  <md-card-title>{{'Grobauswertung : ' + currentName }}</md-card-title>
+<mat-card>
+  <mat-card-title>{{'Grobauswertung : ' + currentName }}</mat-card-title>
 
   <form>
-    <md-select placeholder="MA wählen" (change)="onDateChange($event.value)" name="date">
-      <md-option *ngFor="let date of names" [value]="date">
+    <mat-select placeholder="MA wählen" (change)="onDateChange($event.value)" name="date">
+      <mat-option *ngFor="let date of names" [value]="date">
         {{date}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
   </form>
   <br><br>
-  <md-card-content>
+  <mat-card-content>
 
-    <md-card>
-      <md-card-title>Gesamtauswertung</md-card-title>
-      <div id="bar_chart" [chartData]="bar_ChartData" [chartOptions] = "bar_ChartOptions" chartType="LineChart" GoogleChart></div>
-    </md-card>
+    <mat-card>
+      <mat-card-title>Gesamtauswertung</mat-card-title>
+      <div appGoogleChart id="bar_chart" [chartData]="bar_ChartData" [chartOptions] = "bar_ChartOptions" chartType="LineChart" GoogleChart></div>
+    </mat-card>
 
     <div *ngFor="let chart of bar_Datas; let i = index" [attr.data-index]="i" >
 
 
-      <md-card>
-        <md-card-title>{{formFields[i].topic}}</md-card-title>
-        <div id="{{'bar_chart'+i}}" [chartData]="chart" [chartOptions] = "bar_ChartOptions" chartType="LineChart" GoogleChart></div>
-      </md-card>
+      <mat-card>
+        <mat-card-title>{{formFields[i].topic}}</mat-card-title>
+        <div appGoogleChart id="{{'bar_chart'+i}}" [chartData]="chart" [chartOptions] = "bar_ChartOptions" chartType="LineChart" GoogleChart></div>
+      </mat-card>
 
 
 
     </div>
 
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>

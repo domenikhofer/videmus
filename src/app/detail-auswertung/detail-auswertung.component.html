@@ -1,33 +1,33 @@
 <app-menu></app-menu>
-<md-card>
-  <md-card-title>{{'Detailauswertung ' + currentName}}</md-card-title>
+<mat-card>
+  <mat-card-title>{{'Detailauswertung ' + currentName}}</mat-card-title>
   <form>
-    <md-select placeholder="MA wählen" (change)="onDateChange($event.value)" name="date">
-      <md-option *ngFor="let date of names" [value]="date">
+    <mat-select placeholder="MA wählen" (change)="onDateChange($event.value)" name="date">
+      <mat-option *ngFor="let date of names" [value]="date">
         {{date}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
   </form>
   <br><br>
-  <md-card-content>
-    <md-tab-group>
+  <mat-card-content>
+    <mat-tab-group>
 
-    <div *ngFor="let charts of bar_ChartData; let i = index" [attr.data-index]="i" >
+      <div *ngFor="let charts of bar_ChartData; let i = index" [attr.data-index]="i" >
 
 
-        <md-tab label="{{formFields[i].topic}}">
+        <mat-tab label="{{formFields[i].topic}}">
 
-      <div *ngFor="let chart of charts; let j = index" [attr.data-index]="j" >
-      <md-card>
-        <md-card-title>{{formFields[i].criteria[j].title}}</md-card-title>
-        <div id="{{'bar_chart'+i+j}}" [chartData]="chart" [chartOptions] = "bar_ChartOptions" chartType="LineChart" GoogleChart></div>
-      </md-card>
+          <div *ngFor="let chart of charts; let j = index" [attr.data-index]="j" >
+            <mat-card>
+              <mat-card-title>{{formFields[i].criteria[j].title}}</mat-card-title>
+              <div appGoogleChart id="{{'bar_chart'+i+j}}" [chartData]="chart" [chartOptions] = "bar_ChartOptions" chartType="LineChart" GoogleChart></div>
+            </mat-card>
 
+          </div>
+
+        </mat-tab>
       </div>
+    </mat-tab-group>
 
-        </md-tab>
-    </div>
-    </md-tab-group>
-
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>
