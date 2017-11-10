@@ -43,7 +43,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(
-      appRoutes
+      appRoutes,
+      GoogleChart
     ),
     BrowserModule,
     BrowserAnimationsModule,
@@ -59,9 +60,9 @@ const appRoutes: Routes = [
     MdFormFieldModule,
     MdOptionModule,
     MdSelectModule,
-    ChartsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-CH'},
