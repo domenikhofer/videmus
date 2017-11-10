@@ -7,3 +7,15 @@
   color:white;
   font-weight: bold;
 }
+
+.measures, .notes {
+  height:200px;
+}
+
+.mat-form-field-wrapper{
+  margin:20px;
+}
+
+.submit_btn{
+  margin-left:50px;
+}

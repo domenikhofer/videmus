@@ -13,7 +13,7 @@
         <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
         <md-datepicker #picker></md-datepicker>
       </md-form-field>
-
+<br><br>
     <md-tab-group (selectChange)="setGraph($event)">
       <div *ngFor="let topic of formfields; let i = index" [attr.data-index]="i">
         <md-tab label="{{topic.topic}} {{(scores[i] ? scores[i].result : []) | average }}">
@@ -46,17 +46,16 @@
       </div>
 
     </md-tab-group>
-
+<br><br>
 
       <md-form-field>
-        <textarea name="measures" ngModel mdInput placeholder="Massnahmenplan"></textarea>
+        <textarea class="measures" name="measures" ngModel mdInput placeholder="Massnahmenplan"></textarea>
       </md-form-field>
       <md-form-field>
-        <textarea name="notes" ngModel mdInput placeholder="Bemerkungen"></textarea>
+        <textarea class="notes" name="notes" ngModel mdInput placeholder="Bemerkungen"></textarea>
       </md-form-field>
 
-
-      <button type="submit"  md-fab color="accent"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+      <button class="submit_btn" type="submit"  md-fab color="accent"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
 
     </form>
 
