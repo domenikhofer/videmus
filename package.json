@@ -2,16 +2,22 @@
   "name": "videmus",
   "version": "0.0.0",
   "license": "MIT",
+  "engines": {
+    "node": "7.9.0",
+    "npm": "4.2.0"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "1.2.4",
     "@angular/animations": "^4.3.6",
     "@angular/cdk": "^2.0.0-beta.10",
     "@angular/common": "^4.0.0",
