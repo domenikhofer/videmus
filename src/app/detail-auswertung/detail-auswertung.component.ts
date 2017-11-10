@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormFieldsService} from '../form-fields.service';
 import {ActivatedRoute} from '@angular/router';
 import {DatePipe} from '@angular/common';
@@ -16,7 +16,6 @@ export class DetailAuswertungComponent implements OnInit {
   bar_ChartData;
   currentName;
   oe;
-  index;
 
   constructor(FormFieldService: FormFieldsService, private route: ActivatedRoute, private datePipe: DatePipe) {
     this.FormFieldService = FormFieldService;
@@ -52,7 +51,6 @@ export class DetailAuswertungComponent implements OnInit {
     this.getDetail(this.names[0]);
 
   }
-
 
   allStorage() {
 
@@ -96,20 +94,5 @@ const dataCollection = [];
     this.getDetail(name);
   }
 
-  onTabChange() {
-    setTimeout(() => {
-      if (typeof(Event) === 'function') {
-        // modern browsers
-        window.dispatchEvent(new Event('resize'));
-      }else{
-        // for IE and other old browsers
-        // causes deprecation warning on modern browsers
-        const evt = window.document.createEvent('UIEvents');
-        evt.initUIEvent('resize', true, false, window, 0);
-        window.dispatchEvent(evt);
-      }
-    }, 400);
-
-  }
 
 }

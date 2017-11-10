@@ -10,12 +10,12 @@
   </form>
   <br><br>
   <md-card-content>
-    <md-tab-group (click)="onTabChange()">
+    <md-tab-group>
 
     <div *ngFor="let charts of bar_ChartData; let i = index" [attr.data-index]="i" >
 
 
-        <md-tab label="{{formFields[i].topic}}" >
+        <md-tab label="{{formFields[i].topic}}">
 
       <div *ngFor="let chart of charts; let j = index" [attr.data-index]="j" >
       <md-card>
