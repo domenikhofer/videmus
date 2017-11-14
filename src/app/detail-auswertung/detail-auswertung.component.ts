@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormFieldsService} from '../form-fields.service';
 import {ActivatedRoute} from '@angular/router';
 import {DatePipe} from '@angular/common';
-import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-chart.directive';
 
 @Component({
   selector: 'app-detail-auswertung',
@@ -17,6 +16,7 @@ export class DetailAuswertungComponent implements OnInit {
   bar_ChartData;
   currentName;
   oe;
+  activeTab = 0;
 
   constructor(FormFieldService: FormFieldsService, private route: ActivatedRoute, private datePipe: DatePipe) {
     this.FormFieldService = FormFieldService;
@@ -33,6 +33,7 @@ export class DetailAuswertungComponent implements OnInit {
     vAxis: {
       ticks: [0, 1, 2, 3, 4, 5, 6]
     },
+    theme: 'material',
     curveType: 'function',
     legend: {position: 'none'}
   };
@@ -51,7 +52,9 @@ export class DetailAuswertungComponent implements OnInit {
 
     this.getDetail(this.names[0]);
 
+
   }
+
 
   allStorage() {
 
@@ -73,7 +76,7 @@ export class DetailAuswertungComponent implements OnInit {
     this.filtStorage = this.storage.filter(x => x.name_candidate === name);
     this.formFields = this.FormFieldService.getFormFields();
 
-const dataCollection = [];
+    const dataCollection = [];
     for (let i = 0; i < this.filtStorage[0].data.length; i++) {
       const dataBracket = [];
       for (let j = 0; j < this.filtStorage[0].data[0].result.length; j++) {
@@ -86,14 +89,16 @@ const dataCollection = [];
       }
       dataCollection.push(dataBracket);
     }
-    setTimeout(() => {
+
       this.bar_ChartData = dataCollection;
-    }, 100);
   }
 
   onDateChange(name) {
     this.getDetail(name);
   }
 
+  onTabChange(id) {
+    this.activeTab = id;
+  }
 
 }

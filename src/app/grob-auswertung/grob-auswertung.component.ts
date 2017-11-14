@@ -35,6 +35,7 @@ export class GrobAuswertungComponent implements OnInit {
     vAxis: {
       ticks: [0, 1, 2, 3, 4, 5, 6]
     },
+    theme: 'material',
     curveType: 'function',
     legend: {position: 'none'}
   };
@@ -108,7 +109,8 @@ export class GrobAuswertungComponent implements OnInit {
     const chartDataFormatted = [];
     chartData.forEach((x, y) => chartDataFormatted.push([this.dates[y], x]));
 
-    this.bar_ChartData = [['Person', 'Durchschnitt'], ...chartDataFormatted];
+    this.bar_ChartData = [[['Person', 'Durchschnitt'], ...chartDataFormatted]];
+
 
 
   }
@@ -133,6 +135,7 @@ export class GrobAuswertungComponent implements OnInit {
 
   onDateChange(date) {
     this.drawGraphs(date);
+
   }
 
 

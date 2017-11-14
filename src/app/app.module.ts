@@ -27,9 +27,10 @@ import {
   MatOptionModule,
   MatButtonToggleModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatProgressSpinnerModule, MatRadioModule
 } from '@angular/material';
-import {GoogleChartDirective} from './google-chart-directive.directive';
+import { GoogleChartDirective } from './google-chart/google-chart.component';
 
 const appRoutes: Routes = [
   {path: ':id/form', component: CoachingFormComponent},
@@ -67,6 +68,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
     FormsModule,
     ReactiveFormsModule
 
